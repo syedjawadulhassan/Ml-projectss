@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pneumonia Detection | Home</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="{{ url_for('index') }}">
+        <span class="brand-icon">🫁</span> Pneumonia Detection
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item"><a class="nav-link active" href="{{ url_for('index') }}">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('about') }}">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('upload') }}">Upload</a></li>
+
+          <!-- 🌙 Dark mode -->
+          <li class="nav-item ms-lg-3">
+            <span class="theme-toggle text-white" onclick="toggleTheme()">🌙</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero-section py-5">
+    <div class="container py-4">
+      <div class="row align-items-center g-4">
+
+        <!-- LEFT -->
+        <div class="col-lg-7">
+          <h1 class="display-5 fw-bold text-dark mb-3">
+            AI-Powered Chest X-Ray Analysis
+          </h1>
+
+          <p class="lead text-muted mb-4">
+            Upload a chest X-ray and receive automated pneumonia screening using a
+            ResNet50 deep learning model. Built for research and educational use.
+          </p>
+
+          <div class="d-flex flex-wrap gap-3">
+            <a href="{{ url_for('upload') }}" class="btn btn-primary btn-lg px-4">
+              🚀 Upload X-Ray
+            </a>
+            <a href="{{ url_for('about') }}" class="btn btn-outline-primary btn-lg px-4">
+              Learn More
+            </a>
+          </div>
+
+          <!-- MINI STATS -->
+          <div class="row mt-4 text-center text-lg-start">
+            <div class="col-4">
+              <h5 class="fw-bold mb-0">ResNet50</h5>
+              <small class="text-muted">Backbone</small>
+            </div>
+            <div class="col-4">
+              <h5 class="fw-bold mb-0">Grad-CAM</h5>
+              <small class="text-muted">Explainable AI</small>
+            </div>
+            <div class="col-4">
+              <h5 class="fw-bold mb-0">Real-Time</h5>
+              <small class="text-muted">Prediction</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT AI CARD -->
+        <div class="col-lg-5 text-center">
+          <div class="hero-card p-4 rounded-4 shadow ai-scan-wrapper">
+            <div class="hero-icon mb-2">🧠</div>
+            <p class="text-muted small mb-2">AI Medical Vision Engine</p>
+            <div class="ai-scan-line"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MODEL STATUS ===== -->
+  <div class="container mb-5">
+    {% if model_loaded %}
+    <div class="alert alert-success d-flex align-items-center shadow-sm ai-pulse" role="alert">
+      <span class="me-2">✔</span>
+      <div>Model is loaded and ready for predictions.</div>
+    </div>
+    {% else %}
+    <div class="alert alert-warning d-flex align-items-center shadow-sm" role="alert">
+      <span class="me-2">⚠</span>
+      <div>
+        Model not loaded. Run <code>python train_model.py</code> to generate
+        <code>model/pneumonia_model.pth</code>.
+      </div>
+    </div>
+    {% endif %}
+  </div>
+
+  <!-- ===== FEATURES ===== -->
+  <section class="container py-4">
+    <div class="row g-4">
+
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm feature-card">
+          <div class="card-body p-4">
+            <div class="feature-icon mb-3">📤</div>
+            <h5 class="card-title">Upload</h5>
+            <p class="card-text text-muted">
+              Securely upload chest X-ray images in PNG or JPG format.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm feature-card">
+          <div class="card-body p-4">
+            <div class="feature-icon mb-3">🤖</div>
+            <h5 class="card-title">AI Analysis</h5>
+            <p class="card-text text-muted">
+              Deep learning model evaluates pneumonia probability.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm feature-card">
+          <div class="card-body p-4">
+            <div class="feature-icon mb-3">📊</div>
+            <h5 class="card-title">Grad-CAM</h5>
+            <p class="card-text text-muted">
+              Visual heatmap highlights model attention regions.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== LOADING OVERLAY ===== -->
+  <div id="loadingOverlay" class="loading-overlay">
+    <div class="text-center">
+      <div class="med-spinner mb-3"></div>
+      <div style="font-weight:600;">AI is analyzing the X-ray...</div>
+    </div>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer mt-auto py-4 bg-light border-top">
+    <div class="container text-center text-muted small">
+      Pneumonia Detection System — Deep Learning &amp; Flask. For educational use only.
+    </div>
+  </footer>
+
+  <!-- ===== SCRIPTS ===== -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle("dark-mode");
+      localStorage.setItem(
+        "theme",
+        document.body.classList.contains("dark-mode") ? "dark" : "light"
+      );
+    }
+
+    window.addEventListener("load", () => {
+      if (localStorage.getItem("theme") === "dark") {
+        document.body.classList.add("dark-mode");
+      }
+    });
+  </script>
+
+</body>
+</html>

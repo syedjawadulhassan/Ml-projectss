@@ -1,0 +1,139 @@
+/* ========================================
+   🚀 NEXT LEVEL AI EFFECTS
+======================================== */
+
+/* ---------- Smooth global feel ---------- */
+* {
+  scroll-behavior: smooth;
+}
+
+/* ---------- AI Scan Animation ---------- */
+.ai-scan-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.ai-scan-line {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #0d6efd, transparent);
+  animation: scanMove 2.2s linear infinite;
+  opacity: 0.8;
+}
+
+@keyframes scanMove {
+  0% { top: -10%; }
+  100% { top: 110%; }
+}
+
+/* ---------- Pulse glow (AI detected) ---------- */
+.ai-pulse {
+  animation: pulseGlow 1.8s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 rgba(13,110,253,0);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(13,110,253,0.35);
+  }
+}
+
+/* ---------- Premium card hover ---------- */
+.card,
+.feature-card,
+.hero-card {
+  transition: all 0.28s cubic-bezier(.2,.8,.2,1);
+}
+
+.card:hover,
+.feature-card:hover,
+.hero-card:hover {
+  transform: translateY(-6px) scale(1.015);
+}
+
+/* ---------- Advanced button ripple ---------- */
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.25), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.btn-primary:hover::after {
+  opacity: 1;
+}
+
+/* ---------- Loading overlay ---------- */
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.loading-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ---------- Medical spinner ---------- */
+.med-spinner {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 6px solid #e9f2ff;
+  border-top-color: #0d6efd;
+  animation: spinMed 0.9s linear infinite;
+}
+
+@keyframes spinMed {
+  to { transform: rotate(360deg); }
+}
+
+/* ---------- Dark mode support ---------- */
+body.dark-mode {
+  background: #0b1220;
+  color: #e6edf7;
+}
+
+body.dark-mode .card,
+body.dark-mode .hero-card,
+body.dark-mode .feature-card {
+  background: rgba(20, 30, 55, 0.85);
+  color: #e6edf7;
+}
+
+body.dark-mode .navbar {
+  background: linear-gradient(135deg, #0b3aa3, #071f5c) !important;
+}
+
+/* ---------- Dark mode toggle button ---------- */
+.theme-toggle {
+  cursor: pointer;
+  border-radius: 50%;
+  padding: 6px 10px;
+  transition: all 0.2s ease;
+}
+
+.theme-toggle:hover {
+  background: rgba(255,255,255,0.15);
+}

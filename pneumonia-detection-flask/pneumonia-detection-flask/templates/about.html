@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About | Pneumonia Detection</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="{{ url_for('index') }}">
+        <span class="brand-icon">🫁</span> Pneumonia Detection
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('index') }}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="{{ url_for('about') }}">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('upload') }}">Upload</a>
+          </li>
+
+          <!-- 🌙 Dark mode toggle -->
+          <li class="nav-item ms-lg-3">
+            <span class="theme-toggle text-white" onclick="toggleTheme()">🌙</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero-section py-5">
+    <div class="container text-center">
+      <h1 class="fw-bold mb-3">AI-Powered Pneumonia Detection</h1>
+      <p class="text-muted mb-0">
+        Deep learning system for automated chest X-ray analysis
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="container pb-5">
+
+    <div class="row g-4">
+
+      <!-- LEFT CONTENT -->
+      <div class="col-lg-8">
+
+        <!-- Goal -->
+        <div class="card hero-card border-0 mb-4">
+          <div class="card-body p-4">
+            <h5 class="card-title text-primary fw-bold">🎯 Goal</h5>
+            <p class="mb-0">
+              This system detects pneumonia from chest X-ray images using deep learning.
+              It leverages transfer learning with a ResNet50 backbone pretrained on ImageNet
+              and fine-tuned on the Kaggle Chest X-Ray Pneumonia dataset.
+            </p>
+          </div>
+        </div>
+
+        <!-- Tech Stack -->
+        <div class="card hero-card border-0 mb-4">
+          <div class="card-body p-4">
+            <h5 class="card-title text-primary fw-bold">⚙️ Tech Stack</h5>
+            <ul class="mb-0">
+              <li><strong>Backend:</strong> Python 3.10+, Flask</li>
+              <li><strong>ML/DL:</strong> PyTorch, torchvision, ResNet50</li>
+              <li><strong>Frontend:</strong> HTML5, CSS3, Bootstrap 5</li>
+              <li><strong>Visualization:</strong> Grad-CAM heatmaps</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Disclaimer -->
+        <div class="card hero-card border-0 mb-4">
+          <div class="card-body p-4">
+            <h5 class="card-title text-primary fw-bold">⚠️ Disclaimer</h5>
+            <p class="text-muted mb-0">
+              This application is for <strong>research and educational purposes only</strong>.
+              It does not replace professional medical diagnosis. Always consult a qualified
+              healthcare provider for medical decisions.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT SIDE STATS (🔥 premium look) -->
+      <div class="col-lg-4">
+
+        <div class="card hero-card border-0 mb-4 text-center">
+          <div class="card-body p-4">
+            <div class="feature-icon mb-2">🧠</div>
+            <h4 class="fw-bold">ResNet50</h4>
+            <p class="text-muted small mb-0">Transfer Learning Backbone</p>
+          </div>
+        </div>
+
+        <div class="card hero-card border-0 mb-4 text-center">
+          <div class="card-body p-4">
+            <div class="feature-icon mb-2">📊</div>
+            <h4 class="fw-bold">Grad-CAM</h4>
+            <p class="text-muted small mb-0">Explainable AI Visualization</p>
+          </div>
+        </div>
+
+        <div class="card hero-card border-0 mb-4 text-center ai-pulse">
+          <div class="card-body p-4">
+            <div class="feature-icon mb-2">⚡</div>
+            <h4 class="fw-bold">Real-Time</h4>
+            <p class="text-muted small mb-0">Instant Prediction</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer mt-auto py-4 bg-light border-top">
+    <div class="container text-center text-muted small">
+      Pneumonia Detection System — Deep Learning &amp; Flask. For educational use only.
+    </div>
+  </footer>
+
+  <!-- ===== SCRIPTS ===== -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle("dark-mode");
+      localStorage.setItem(
+        "theme",
+        document.body.classList.contains("dark-mode") ? "dark" : "light"
+      );
+    }
+
+    window.addEventListener("load", () => {
+      if (localStorage.getItem("theme") === "dark") {
+        document.body.classList.add("dark-mode");
+      }
+    });
+  </script>
+
+</body>
+</html>
